@@ -39,8 +39,8 @@ class StringCleanerBuilder:
         )
         return self
 
-    def escape_html(self):
-        self.steps.append(lambda data: html.escape(data))
+    def escape_html(self, quote=True):
+        self.steps.append(lambda data: html.escape(data, quote=quote))
         return self
 
     def truncate(self, max_length):
@@ -65,11 +65,11 @@ if __name__ == "__main__":
         StringCleanerBuilder()
         .strip_whitespace()
         .remove_camelcase()
-        .remove_special_characters(allowed_chars="-_ ")
+        .remove_special_characters(allowed_chars="-_ '")
         .escape_html()
         .build()
     )
 
-    data = "  Hello, World! Welcome to theBuilderPattern! 😀 "
+    data = "  Hello, World! I'm builder. Welcome to theBuilderPattern! 😀 "
     cleaned_data = cleaner(data)
     print(cleaned_data)

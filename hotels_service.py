@@ -13,10 +13,10 @@ class HotelsService(object):
         # data cleaners
         self.string_cleaner = (
             StringCleanerBuilder()
-            .escape_html()
+            .escape_html(quote=False)
             .normalize_unicode()
             .strip_whitespace()
-            .remove_special_characters(allowed_chars=',. -\'')
+            .remove_special_characters(allowed_chars=",. -':()/")
             .build()
         )
 
